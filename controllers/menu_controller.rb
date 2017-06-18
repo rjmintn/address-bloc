@@ -102,6 +102,7 @@ class MenuController
 
     puts "n - next entry"
     puts "d - delete entry"
+    puts "X - eXterminate all entries"
     puts "e - edit this entry"
     puts "m - return to main menu"
     selection = gets.chomp
@@ -111,6 +112,8 @@ class MenuController
 
     when "d"
       delete_entry(entry)
+    when "X"
+      delete_all_entry
     when "e"
       edit_entry(entry)
       entry_submenu(entry)
@@ -127,6 +130,12 @@ class MenuController
   def delete_entry(entry)
     address_book.entries.delete(entry)
     puts "#{entry.name} has been deleted"
+  end
+
+  def delete_all_entry
+    address_book.entries.clear
+    system "clear"
+    main_menu
   end
 
   def edit_entry(entry)
